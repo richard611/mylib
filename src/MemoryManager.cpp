@@ -368,8 +368,10 @@ void CMemoryRegister::RegisterCopy(STonyXiaoMemoryRegister* pDest, //目标结�
 	if (szInfo) //由于szInfo 可以是null，因此需要加判断
 	{ //请注意这里对SafeStrcpy 的使用，拷贝永远是安全的，程序减少很多判断，显得很简洁
 		SafeStrcpy(pDest->m_szInfo, szInfo, TONY_MEMORY_BLOCK_INFO_MAX_SIZE);
-	} else
-		TONY_CLEAN_CHAR_BUFFER(szInfo); //如果为空，则缓冲区置为空字符串
+	} else {
+		//TONY_CLEAN_CHAR_BUFFER(szInfo); //如果为空，则缓冲区置为空字符串
+		SafeStrcpy(pDest->m_szInfo, "no info", TONY_MEMORY_BLOCK_INFO_MAX_SIZE);
+	}
 }
 
 //注册方法
@@ -618,7 +620,7 @@ CTonyMemoryPoolWithLock::CTonyMemoryPoolWithLock(CTonyLowDebug* pDebug,
 		m_pRegister = new CMemoryRegister(m_pDebug);
 		m_pSocketRegister = new CSocketRegister(m_pDebug);
 	} //打印内存池正确启动标志
-	TONY_DEBUG("Tony.Xiao. Memory Pool Open, register flag=%d\n",
+	TONY_DEBUG("Memory Pool Open, register flag=%d\n",
 			bOpenRegisterFlag);
 }
 //析构函数
@@ -637,7 +639,7 @@ CTonyMemoryPoolWithLock::~CTonyMemoryPoolWithLock() {
 		delete m_pMemPool;
 		m_pMemPool = null;
 	} //打印内存池正确结束标志
-	TONY_DEBUG("Tony.Xiao. Memory Pool Close.\n");
+	TONY_DEBUG("Memory Pool Close.\n");
 }
 //设置退出标志，加速内存栈的释放过程
 void CTonyMemoryPoolWithLock::SetCloseFlag(bool bFlag) {
@@ -649,15 +651,13 @@ void* CTonyMemoryPoolWithLock::Malloc(int nSize, char* szInfo) {
 	void* pRet = null;
 	if (m_pMemPool) {
 		pRet = m_pMemPool->Malloc(nSize); //调用内存栈实现内存分配
-		if (pRet)
-			Register(pRet, szInfo); //如果指针有效，自动注册
+		if (pRet) Register(pRet, szInfo); //如果指针有效，自动注册
 	}
 	return pRet;
 }
 //Free 函数
 void CTonyMemoryPoolWithLock::Free(PVOID pBlock) {
-	if (m_pMemPool)
-		m_pMemPool->Free(pBlock); //调用内存栈实现Free
+	if (m_pMemPool) m_pMemPool->Free(pBlock); //调用内存栈实现Free
 	UnRegister(pBlock); //反注册指针
 }
 //ReMalloc 函数
