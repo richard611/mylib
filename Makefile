@@ -1,11 +1,11 @@
 VPATH := ./src
 
-OBJECTS := Debug.o MemoryManager.o Mint.o MrswLock.o Nonreentrant.o Statistics.o TonyLowDebug.o
+OBJECTS := Debug.o MemoryManager.o Mint.o MrswLock.o Nonreentrant.o Statistics.o TonyLowDebug.o CSocket.o
 
 LIBNAME := libmy.a
 
 CC := g++
-CFLAGS := -Wcast-qual
+CFLAGS := -Wno-cast-qual
 AR := ar
 CFLAGS := -I./include
 
