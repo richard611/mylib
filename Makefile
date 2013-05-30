@@ -1,6 +1,6 @@
 VPATH := ./src
 
-OBJECTS := Debug.o MemoryManager.o Mint.o MrswLock.o Nonreentrant.o Statistics.o TonyLowDebug.o CSocket.o
+OBJECTS := Debug.o MemoryManager.o Mint.o MrswLock.o Nonreentrant.o Statistics.o TonyLowDebug.o CSocket.o BaseLib.o Buffer.o ThreadPool.o Log.o
 
 LIBNAME := libmy.a
 
