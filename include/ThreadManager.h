@@ -1,6 +1,6 @@
 #ifndef __THREADMANAGER_H_
 #define __THREADMANAGER_H_
-#include "cz_mrsw_lock.h"
+#include "MrswLock.h"
 
 //线程控制锁类声明和实现，完全采用内联模型，保证效率
 class CThreadManager {
