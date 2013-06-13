@@ -5,9 +5,9 @@ OBJECTS := Debug.o MemoryManager.o Mint.o MrswLock.o Nonreentrant.o Statistics.o
 LIBNAME := libmy.a
 
 CC := g++
-CFLAGS := -Wno-cast-qual
+CFLAGS := -Wno-write-strings -I./include
 AR := ar
-CFLAGS := -I./include
+#CFLAGS += -I./include
 
 mylib: $(OBJECTS)
 	$(AR) rcs $(LIBNAME) $(OBJECTS)

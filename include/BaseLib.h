@@ -7,6 +7,9 @@
 #ifndef TONY_APP_TEMP_PATH_NAME_SIZE
 #define TONY_APP_TEMP_PATH_NAME_SIZE 100
 #endif
+
+#include <CSocket.h>
+
 typedef void (*_BASE_LIBRARY_PRINT_INFO_CALLBACK)(void* pCallParam);
 //static void BaseLibraryPrintInfoCallback(void* pCallParam);
 typedef void (*_APP_INFO_OUT_CALLBACK)(char* szInfo,void* pCallParam);
@@ -31,6 +34,8 @@ public:
 	char m_szLogPathName[TONY_APP_LOG_PATH_NAME_SIZE];
 //临时文件路径
 	char m_szTempPathName[TONY_APP_TEMP_PATH_NAME_SIZE];
+//Socket
+	SocketBuilder *m_pSocketBuilder;
 //日志模块
 	CTonyXiaoLog* m_pLog;
 //内存池

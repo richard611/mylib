@@ -56,6 +56,9 @@ CTonyBaseLibrary::CTonyBaseLibrary(char* szAppName, char* szLogPath,
 		TONY_DEBUG("CTonyBaseLibrary(): m_pMemPool new fail!\n");
 		return;
 	}
+
+	m_pSocketBuilder = new SocketBuilder(m_pDebug, m_pMemPool);
+
 	m_pLog = new CTonyXiaoLog(m_pDebug, m_pMemPool, m_szLogPathName, //注意，这里使用日志路径
 			m_szAppName);
 	if (m_pLog) { //注意，此时已经可以利用内存池的注册机制
