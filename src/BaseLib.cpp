@@ -57,8 +57,6 @@ CTonyBaseLibrary::CTonyBaseLibrary(char* szAppName, char* szLogPath,
 		return;
 	}
 
-	m_pSocketBuilder = new SocketBuilder(m_pDebug, m_pMemPool);
-
 	m_pLog = new CTonyXiaoLog(m_pDebug, m_pMemPool, m_szLogPathName, //注意，这里使用日志路径
 			m_szAppName);
 	if (m_pLog) { //注意，此时已经可以利用内存池的注册机制
@@ -73,10 +71,11 @@ CTonyBaseLibrary::CTonyBaseLibrary(char* szAppName, char* szLogPath,
 		m_pMemPool->Register(m_pTaskRun, "CTonyBaseLibrary::m_pTaskRun");
 	}
 	TimeSetNow (m_tLastPrint); //计时因子
-//注意，任务回调函数的参数是本对象指针
+	//注意，任务回调函数的参数是本对象指针
 	if (!m_pTaskRun->StartTask(InfoPrintTaskCallback, this)) { //失败则报警
 		m_pLog->_XGSyslog("CTonyBaseLibrary:: start print info task fail!\n");
-	} //笔者习惯，聚合工具类启动完毕标志，也是应用程序逻辑开始启动标志
+	} 
+	//笔者习惯，聚合工具类启动完毕标志，也是应用程序逻辑开始启动标志
 	TONY_DEBUG(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
 }
 

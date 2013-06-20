@@ -264,6 +264,7 @@ public:
 	void PrintTree(void);
 	//关键信息显示
 	void PrintInfo(void);
+	void test(void);
 	CTonyMemoryStack* m_pMemPool; //内存栈对象
 	CTonyLowDebug* m_pDebug;
 };

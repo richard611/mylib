@@ -646,6 +646,10 @@ void CTonyMemoryPoolWithLock::SetCloseFlag(bool bFlag) {
 	if (m_pMemPool)
 		m_pMemPool->SetCloseFlag(bFlag);
 }
+
+void CTonyMemoryPoolWithLock::test() {
+	printf("this is in memory pool test");
+}
 //Malloc 函数
 void* CTonyMemoryPoolWithLock::Malloc(int nSize, char* szInfo) {
 	void* pRet = null;
@@ -653,6 +657,7 @@ void* CTonyMemoryPoolWithLock::Malloc(int nSize, char* szInfo) {
 		pRet = m_pMemPool->Malloc(nSize); //调用内存栈实现内存分配
 		if (pRet) Register(pRet, szInfo); //如果指针有效，自动注册
 	}
+	//	printf("Malloc(int nSize, char *szInfo)\n");
 	return pRet;
 }
 //Free 函数
